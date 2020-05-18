@@ -1,0 +1,8 @@
+let a = 1;
+let b = 3;
+
+const count = 0;
+
+while ( a < b ) {
+  count = count + 1;
+}

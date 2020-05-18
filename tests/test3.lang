@@ -1,0 +1,5 @@
+let a = b;
+
+if ( x ! y ) [
+  let b1 = a;
+]
