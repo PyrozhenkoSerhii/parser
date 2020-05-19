@@ -4,8 +4,9 @@
   "description": "",
   "main": "lexer.js",
   "scripts": {
-    "start": "nodemon --exec babel-node lexer.js",
-    "build": "babel -d ./build ./src -s"
+    "start": "nodemon --exec babel-node ./src/lexer.js",
+    "build": "babel -d ./build ./src -s",
+    "parse": "nodemon --exec babel-node ./src/parser.js"
   },
   "keywords": [],
   "author": "",
@@ -16,5 +17,9 @@
     "@babel/node": "^7.8.7",
     "@babel/preset-env": "^7.9.6",
     "nodemon": "^2.0.4"
+  },
+  "dependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.8.3",
+    "@babel/preset-flow": "^7.9.0"
   }
 }

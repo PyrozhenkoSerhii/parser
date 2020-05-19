@@ -1,13 +1,14 @@
 import fs from "fs";
 import { tokens } from "./tokens"
+import { type TToken } from "../types/token"
 
-const isDivider = (char) => {
+const isDivider = (char: string): boolean => {
   const dividerRegex = /(\n|\s+|\t)/;
   return dividerRegex.test(char);
 }
 
-const lexer = (() => {
-  const code = fs.readFileSync(process.env.FILE_PATH || '../tests/test1.lang').toString();
+export const lexer = (path: string): Array<TToken> => {
+  const code = fs.readFileSync(path).toString();
   const lines = code.split("\n").map((line) => {
     return `${line}\n`
   });
@@ -33,7 +34,7 @@ const lexer = (() => {
   })
 
 
-  const foundTokens = [];
+  const foundTokens: Array<TToken> = [];
   sequenceList.forEach((sequence) => {
     let matchedToken = '';
     Object.entries(tokens).forEach(([tokenId, tokenRegex]) => {
@@ -49,6 +50,5 @@ const lexer = (() => {
     })
   })
 
-  console.table(foundTokens)
-})();
-
+  return foundTokens;
+}
