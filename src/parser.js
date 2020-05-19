@@ -178,7 +178,6 @@ class Parser {
     /**
      * Nothing was matched - error in the expression
      */
-    console.log('here')
     return null;
   }
 }
