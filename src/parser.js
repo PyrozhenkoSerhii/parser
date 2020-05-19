@@ -44,11 +44,8 @@ class Parser {
    */
   checkTokenAtPosition = (expected: string): string | null => {
     if (this.position === this.tokens.length) {
-      // console.log('>>  Finished recursive descending');
       return null;
     }
-
-    // console.log(`>>  Expected ${expected} at position ${this.position} >> Actual: ${this.tokens[this.position].type} with value ${this.tokens[this.position].lexeme}`)
 
     if (this.position < this.tokens.length && this.tokens[this.position].type === expected) {
       const lexeme = this.tokens[this.position].lexeme;
@@ -153,6 +150,7 @@ class Parser {
   terminal = (): string | number | null => {
     const checkpoint = this.position;
 
+
     /**
      * Matching with the left part of the grammar rule: number
      * If not matched, get back to the pointer position before function execution
@@ -170,7 +168,7 @@ class Parser {
      * Otherwise, return value
      */
     const leftParenthesis = this.checkTokenAtPosition(tokensIds.LEFT_PARENTHESIS);
-    const expressionValue = this.expression();
+    const expressionValue = leftParenthesis && this.expression();
     const rightParenthesis = this.checkTokenAtPosition(tokensIds.RIGHT_PARENTHESIS);
     if (leftParenthesis && (expressionValue ||  expressionValue === 0) && rightParenthesis) {
       return expressionValue;
@@ -180,6 +178,7 @@ class Parser {
     /**
      * Nothing was matched - error in the expression
      */
+    console.log('here')
     return null;
   }
 }
