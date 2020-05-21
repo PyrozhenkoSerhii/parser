@@ -33,13 +33,15 @@ Program =
       // return changed variables
 		  return operations.reduce((variables, operation) => {
         if(!operation.truthy) return variables;
-            
-			  return variables.map((variable, index) => {
-				  return operation.body.leftOperand === variable.id && operation.body.operator === "="
-            ? {...variable, value: operation.body.rightOperand }
-            : variable;
-			    }) 
-		    }, variables)
+
+        return operation.body.reduce((variables, bodyLine) => {
+          return variables.map((variable, index) => {
+            return bodyLine.leftOperand === variable.id && bodyLine.operator === "="
+              ? {...variable, value: bodyLine.rightOperand }
+              : variable;
+            }) 
+		      }, variables)
+        }, variables)
     }
     
 Assignment = Gap Identifier id:ID "=" value: Number ";"? Gap { 
@@ -58,7 +60,9 @@ Condition = id:ID operator:Operator value:Number {
 
 Identifier = Gap "const" / "let" / "var" Gap
 
-Body = Gap left:ID operator:"=" right:Number ";"? Gap {  // currently, only assignment is used as an operator
+Body = lines: Line* { return lines }
+    
+Line = Gap left:ID operator:"=" right:Number ";"? Gap {  // currently, only assignment is used as an operator
 		return {leftOperand: left[0], operator, rightOperand: right }
     }
 
