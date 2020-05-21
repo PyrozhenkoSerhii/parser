@@ -7,7 +7,8 @@
     "start": "nodemon --exec babel-node ./src/lexer.js",
     "build": "babel -d ./build ./src -s",
     "parse": "nodemon --exec babel-node ./src/parser.js",
-    "pegIndex": "nodemon --exec babel-node ./pegGenerator/index.js"
+    "peg:arithemetic": "nodemon --exec babel-node ./pegGenerator/arithmetics.test.js",
+    "peg:condition": "nodemon --exec babel-node ./pegGenerator/condition.test.js"
   },
   "keywords": [],
   "author": "",
